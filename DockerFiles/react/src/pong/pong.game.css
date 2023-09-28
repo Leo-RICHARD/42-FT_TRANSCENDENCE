@@ -1,0 +1,370 @@
+:root
+{
+	--fg_hue: 315;
+	--fg_saturation: 50%;
+	--fg_brightness: 50%;
+	--foreground-color: hsl(
+	var(--fg_hue),
+	var(--fg_saturation),
+	var(--fg_brightness)
+	);
+	
+	--bg_hue: 0;
+	--bg_saturation: 0%;
+	--bg_brightness: 13%;
+	--background-color: hsl(
+	var(--bg_hue),
+	var(--bg_saturation),
+	var(--bg_brightness)
+	);
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.pongGame
+{
+	--lgbtqbgcoloriaplus: linear-gradient(to bottom, rgb(255, 105, 180, 0.42), rgba(255, 0, 0, 0.42), rgba(255, 165, 0, 0.42), rgba(255, 255, 0, 0.42), rgba(0, 128, 0, 0.42), rgba(0, 206, 209, 0.42), rgba(75, 0, 130, 0.42), rgba(139, 0, 139, 0.42),
+	rgb(255, 105, 180, 0.42), rgba(255, 0, 0, 0.42), rgba(255, 165, 0, 0.42), rgba(255, 255, 0, 0.42), rgba(0, 128, 0, 0.42), rgba(0, 206, 209, 0.42), rgba(75, 0, 130, 0.42), rgba(139, 0, 139, 0.42),
+	rgb(255, 105, 180, 0.42), rgba(255, 0, 0, 0.42), rgba(255, 165, 0, 0.42), rgba(255, 255, 0, 0.42), rgba(0, 128, 0, 0.42), rgba(0, 206, 209, 0.42), rgba(75, 0, 130, 0.42), rgba(139, 0, 139, 0.42),
+	rgb(255, 105, 180, 0.42), rgba(255, 0, 0, 0.42), rgba(255, 165, 0, 0.42), rgba(255, 255, 0, 0.42), rgba(0, 128, 0, 0.42), rgba(0, 206, 209, 0.42), rgba(75, 0, 130, 0.42), rgba(139, 0, 139, 0.42),
+	rgb(255, 105, 180, 0.42), rgba(255, 0, 0, 0.42), rgba(255, 165, 0, 0.42), rgba(255, 255, 0, 0.42), rgba(0, 128, 0, 0.42), rgba(0, 206, 209, 0.42), rgba(75, 0, 130, 0.42), rgba(139, 0, 139, 0.42));
+	--glow: 0.2vh 0.2vh 2vh white;
+
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	z-index: 1;
+}
+
+.pongTop
+{
+	height: 19vh !important;
+	margin-top: 0;
+	margin-bottom: 1vh;
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+}
+
+.pongMid
+{
+	height: 60vh !important;
+	background-color: var(--background-color);
+	position: relative;
+	z-index: 9000;
+}
+
+.pongBot	
+{
+	height: 20vh !important;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+.upperbound
+{
+	position: absolute;
+	top: -1vh;
+	width: 100vw;
+	border-top: 1vh solid grey;
+	z-index: 1;
+}
+
+.central_line
+{
+	position: absolute;
+	--x: 50;
+	top: 0;
+	margin-left: calc(var(--x) * 1%);
+	transform: translateX(-50%);
+	height: 100%;
+	border-left: 1vh dashed grey;
+	z-index: 1;
+}
+
+.lowerbound
+{
+	position: absolute;
+	bottom: -1vh;
+	width: 100vw;
+	border-top: 1vh solid grey;
+	z-index: 1;
+}
+
+.paddle {
+	--h: 10;
+	--y: 30;
+
+	position: absolute;
+
+	top: clamp(calc(var(--h) / 2 * 1vh), calc(var(--y) * 1vh), calc(60vh - (var(--h) / 2 * 1vh)));
+	transform: translateY(-50%);
+
+	width: 0.7vw;
+	height: calc(var(--h) * 1vh);
+	background-color: var(--foreground-color);
+	z-index: 1;
+}
+
+.paddle.left {
+	--x: 3;
+	left: calc(var(--x) * 1vw);
+	z-index: 1;
+}
+
+.paddle.right {
+	--x: 96.3;
+	left: calc(var(--x) * 1vw);
+	z-index: 1;
+}
+
+.ball {
+	--x: 50;
+	--y: 30;
+	
+	position: absolute;
+	left: calc(var(--x) * 1vw);
+	top: clamp(0.75vh, calc(var(--y) * 1vh), 59.15vh);
+	transform: translate(-50%, -50%);
+
+	width: 1.5vh;
+	height: 1.5vh;
+	background-color: var(--foreground-color);
+	z-index: 9001;
+
+	border-radius: 50%;
+}
+
+.firstRow
+{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	z-index: 1;
+}
+
+.h1n1
+{
+	position: absolute;
+	margin-top: 5.5vh;
+	font-weight: bold;
+	font-size: 5vh;
+	width: 98vw;
+	margin-left: 1vw;
+	margin-right: 1vw;
+	text-align: center;
+	color: var(--foreground-color);
+	z-index: 1;
+	order: 2;
+}
+
+.buttonBack
+{
+	position: absolute;
+	margin-top: 1.5vh;
+	margin-left: 48vw;
+	margin-right: 48vw;
+	width: 4vw;
+	height: 2vh;
+	font-size: 16px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	cursor: pointer;
+	z-index: 1;
+	order: 1;
+}
+
+.joinQueue
+{
+	position: absolute;
+	width: 12vw;
+	height: 2vh;
+	bottom: 1.5vh;
+	font-size: 16px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.waiting
+{
+	position: absolute;
+	bottom: 0.5vh;
+	font-size: 2vh;
+	color: var(--foreground-color);
+	font-weight: bold;
+	margin-bottom: 1vh;
+	z-index: 1;
+}
+
+.player_ready
+{
+	width: 15vw;
+	height: 20vh;
+	margin: auto;
+	margin-top: 20vh;
+	margin-left: 19vw;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	cursor: pointer;
+	z-index: 9000;
+}
+
+.secondRow
+{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	z-index: 1;
+}
+
+.cancer
+{
+	position: absolute;
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+	bottom: 0.5vh;
+	font-size: 2vh;
+	color: var(--foreground-color);
+	font-weight: bold;
+	margin-bottom: 1vh;
+	z-index: 1;
+}
+
+.name_p
+{
+	flex-basis: 50%;
+	order: 1;
+	text-align: end;
+	z-index: 1;
+}
+
+.score_p
+{
+	flex-basis: 4%;
+	order: 2;
+	text-align: end;
+	z-index: 1;
+}
+
+.bar
+{
+	flex-basis: 6%;
+	order: 3;
+	text-align: center;
+	z-index: 1;
+}
+
+.score_o
+{
+	flex-basis: 4%;
+	order: 4;
+	text-align: start;
+	z-index: 1;
+}
+
+.name_o
+{
+	flex-basis: 50%;
+	order: 5;
+	text-align: start;
+	z-index: 1;
+}
+
+.variant
+{
+	position: relative;
+	width: 100vw;
+	height: 9vh;
+	margin-top: 1vh;
+	color: var(--foreground-color);
+	font-size: 2vh;
+	font-weight: bold;
+	z-index: 1;
+}
+
+.buttonVariant
+{
+	position: absolute;
+	width: 12vw;
+	height: 2vh;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	margin-top: 5.5vh;
+	margin-bottom: 1vh;
+	margin-left: 44vw;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.variantMessage
+{
+	position: absolute;
+	top: 4vh;
+	width: 98vw;
+	margin-left: 1vw;
+	margin-right: 1vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+.choice
+{
+	position: relative;
+	height: 10vh !important;
+	width: 100vw;
+	color: var(--foreground-color);
+	font-size: 2vh;
+	font-weight: bold;
+	z-index: 1;
+}
+
+.buttonAcceptVariant
+{
+	position: absolute;
+	width: 6vw;
+	height: 2.5vh;
+	margin-top: 0;
+	margin-left: 43.5vw;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.buttonDeclineVariant
+{
+	position: absolute;
+	width: 6vw;
+	height: 2.5vh;
+	margin-top: 0;
+	margin-left: 50.5vw;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	cursor: pointer;
+	z-index: 1;
+}
